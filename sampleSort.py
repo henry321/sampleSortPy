@@ -3,10 +3,20 @@ import os
 from operator import itemgetter
 from distutils.dir_util import copy_tree
 
+# Export Dynamikstufe_RR(iteriert)_MICnr 
+# Input: Anzahl Dynamikstufen
+#   x x x x x x x x x x x x
+#   a a a b b b c c c d d d 
+total_dynamics = 7 
+
+
+
+
 
 #Anzahl verwendeter Mikrofone
 #Array Position if loudest Mic
 loudest_mic=0
+num_mics = 3
 
 #Sample Name
 sample_name = "Snr01"
@@ -42,10 +52,16 @@ sorted_files = sorted(files, key=itemgetter(3),reverse=False)
 #print(sorted_files)
 
 new_order= 0
+dynamic_stage = 0
+rr_value = 0
 for setOfSamples in sorted_files:
+
     i = 0
-    while i<3:
+    while i<num_mics:
         #print(setOfSamples[i].split(' ')[0]+str(new_order)+'.wav',setOfSamples[3])
+        
+        # name =str(dynamic_stage)+"_"+str(rr_value)
+        # print(name)
         os.rename(sorted_dir+setOfSamples[i],sorted_dir+setOfSamples[i].split(' ')[0]+'_newOrder_'+str(new_order)+'.wav')
         i += 1
     new_order+=1
